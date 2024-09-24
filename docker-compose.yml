@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  keycloak:
+    image: keycloak/keycloak:latest
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keycloak/keycloak-realm-config.json:/opt/keycloak/data/import/realm.json
+    command: ["start-dev", "--import-realm"]
+
+  springboot-app:
+    build: ./springboot-app
+    ports:
+      - "8081:8081" 
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      - keycloak
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

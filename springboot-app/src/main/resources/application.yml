@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: springboot-client              # ID del cliente registrado en Keycloak
+            client-secret: CtvZfmxGV75TqnreXcMHKLlA7qFuVCbo  # Secreto del cliente
+            scope: openid                             # Alcance del token
+            authorization-grant-type: authorization_code  # Tipo de autorización
+            redirect-uri: http://localhost:8081/login/oauth2/code/keycloak  # URL de redirección
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/mi-realm  # URI del emisor
+            authorization-uri: http://localhost:8080/realms/mi-realm/protocol/openid-connect/auth  # URI de autorización
+            token-uri: http://localhost:8080/realms/mi-realm/protocol/openid-connect/token  # URI de tokens
+            user-info-uri: http://localhost:8080/realms/mi-realm/protocol/openid-connect/userinfo  # URI de información del usuario
+            jwk-set-uri: http://localhost:8080/realms/mi-realm/protocol/openid-connect/certs  # URI del conjunto de JWK

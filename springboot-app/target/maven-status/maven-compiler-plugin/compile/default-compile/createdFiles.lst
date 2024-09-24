@@ -1,0 +1,3 @@
+com\example\KeycloakDockerJavaApplication.class
+com\example\security\SecurityConfig.class
+com\example\controller\HomeController.class
